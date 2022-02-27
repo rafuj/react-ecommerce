@@ -4,11 +4,15 @@ import {
 	GET_PRODUCTS_BEGIN,
 	GET_PRODUCTS_ERROR,
 	GET_PRODUCTS_SUCCESS,
+	GET_SINGLE_PRODUCT_BEGIN,
+	GET_SINGLE_PRODUCT_ERROR,
+	GET_SINGLE_PRODUCT_SUCCESS,
 	SIDEBAR_CLOSE,
 	SIDEBAR_OPEN,
 } from "../actions";
 import reducer from "../reducers/products_reducer";
 import { products_url as url } from "../utils/constants";
+// import { FaClosedCaptioning } from 'react-icons/fa'
 
 const initialState = {
 	isSidebarOpen: false,
@@ -16,6 +20,9 @@ const initialState = {
 	products_error: false,
 	products: [],
 	feature_products: [],
+	single_products_loading: false,
+	single_products_error: false,
+	single_products: [],
 };
 
 const ProductsContext = React.createContext();
@@ -29,6 +36,21 @@ export const ProductsProvider = ({ children }) => {
 	const closeSidebar = () => {
 		dispatch({ type: SIDEBAR_CLOSE });
 	};
+
+	const fetchSingleProduct = async (url) => {
+		dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
+		try {
+			const response = await axios.get(url);
+			const single_products = response.data;
+			dispatch({
+				type: GET_SINGLE_PRODUCT_SUCCESS,
+				payload: single_products,
+			});
+		} catch (err) {
+			dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
+		}
+	};
+
 	const fetchProducts = async (url) => {
 		dispatch({ type: GET_PRODUCTS_BEGIN });
 		try {
@@ -44,7 +66,14 @@ export const ProductsProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<ProductsContext.Provider value={{ openSidebar, closeSidebar, ...state }}>
+		<ProductsContext.Provider
+			value={{
+				openSidebar,
+				closeSidebar,
+				...state,
+				fetchSingleProduct,
+			}}
+		>
 			{children}
 		</ProductsContext.Provider>
 	);
