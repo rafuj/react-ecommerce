@@ -1,5 +1,5 @@
 import React from "react";
-import { BsFillGridFill } from "react-icons/bs";
+import { BsFillGridFill, BsList } from "react-icons/bs";
 import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
 const Sort = () => {
@@ -26,7 +26,7 @@ const Sort = () => {
 					className={!grid_view ? "active" : null}
 					onClick={() => setListView()}
 				>
-					<BsFillGridFill />
+					<BsList />
 				</button>
 			</div>
 			<p>{products.length} products found</p>
