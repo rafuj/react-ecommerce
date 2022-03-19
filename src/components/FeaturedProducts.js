@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useProductsContext } from "../context/products_context";
 import Error from "./Error";
@@ -27,6 +27,9 @@ const FeaturedProducts = () => {
 					})
 					.slice(0, 3)}
 			</div>
+			<Link to="/products" className="btn">
+				All Products
+			</Link>
 		</Wrapper>
 	);
 };
