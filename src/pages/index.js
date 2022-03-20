@@ -1,3 +1,4 @@
+import StripeCheckout from "../components/StripeCheckout";
 import About from "./AboutPage";
 import AuthWrapper from "./AuthWrapper";
 import Cart from "./CartPage";
@@ -7,7 +8,6 @@ import Home from "./HomePage";
 import PrivateRoute from "./PrivateRoute";
 import Products from "./ProductsPage";
 import SingleProduct from "./SingleProductPage";
-
 export {
 	Home,
 	About,
@@ -18,4 +18,5 @@ export {
 	PrivateRoute,
 	Error,
 	AuthWrapper,
+	StripeCheckout,
 };
